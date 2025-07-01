@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'services/firestore_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  // Initialize Firestore service
+  final firestoreService = FirestoreService();
+  
+  // Seed initial data (you can comment this out after first run)
+  await firestoreService.seedInitialData();
+  
   runApp(const MyApp());
 }
 
